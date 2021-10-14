@@ -1,0 +1,9 @@
+- name: install bird
+  package:
+    name: bird
+- name: "Add bird config"
+  template:
+    dest: /etc/bird/bird.conf
+    src: files/bird.conf.template
+  notify:
+    - Restart bird

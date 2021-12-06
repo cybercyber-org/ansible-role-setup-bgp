@@ -5,5 +5,7 @@
   template:
     dest: /etc/bird/bird.conf
     src: files/bird.conf.template
+    owner: root
+    mode: "0644"
   notify:
     - Restart bird

@@ -2,6 +2,8 @@ Ansible role to configure BGP using bird
 
 See [this blog post](https://cybercyber.org/site-to-site-vpn-using-ipsec-virtual-tunnels-and-bgp.html) for an extended use-case.
 
+Install using `ansible-galaxy install cybercyber_org.setup_bgp`.
+
 Supply the variable `bgp` with this content:
 
 ```yaml

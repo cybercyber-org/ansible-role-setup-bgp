@@ -2,8 +2,18 @@ router id {{ bgp.router_id }};
 
 protocol kernel {
 	scan time 60;
-	import none;
-	export all;
+	ipv4 {
+		import none;
+		export all;
+	};
+}
+
+protocol kernel {
+	scan time 60;
+	ipv6 {
+		import none;
+		export all;
+	};
 }
 
 protocol device {
@@ -11,14 +21,22 @@ protocol device {
 }
 
 protocol direct {
+	ipv4;
+	ipv6;
 	interface {{ '"' + bgp.publish_interfaces | join('",""') + '"' }};
 }
 
 {% for neighbor in bgp.neighbors %}
 # link to {{ neighbor.name }}
 protocol bgp {
-	import all;
-	export all;
+	ipv4 {
+		import all;
+		export all;
+	};
+	ipv6 {
+		import all;
+		export all;
+	};
 	local as {{ bgp.as }};
 	neighbor {{ neighbor.address }} as {{ neighbor.as }};
 }

@@ -1,6 +1,6 @@
 - name: install bird
   package:
-    name: bird
+    name: bird2
 - name: "Add bird config"
   template:
     dest: /etc/bird/bird.conf

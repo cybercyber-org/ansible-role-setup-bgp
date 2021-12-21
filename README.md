@@ -10,6 +10,8 @@ Supply the variable `bgp` with this content:
 bgp:
   router_id: foo
   as: 65158
+  publish_interfaces:
+    - eth0
   neighbors:
     - name: A
       address: 192.168.1.2

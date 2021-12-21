@@ -11,14 +11,14 @@ protocol device {
 }
 
 protocol direct {
-	interface "ipsec*";
+	interface {{ '"' + bgp.publish_interfaces | join('",""') + '"' }};
 }
 
 {% for neighbor in bgp.neighbors %}
 # link to {{ neighbor.name }}
 protocol bgp {
 	import all;
-	export filter { if (net ~ [ {{ bgp.export_net }}]) then accept; reject; };
+	export all;
 	local as {{ bgp.as }};
 	neighbor {{ neighbor.address }} as {{ neighbor.as }};
 }

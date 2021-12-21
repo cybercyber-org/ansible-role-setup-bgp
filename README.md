@@ -8,7 +8,7 @@ Supply the variable `bgp` with this content:
 
 ```yaml
 bgp:
-  router_id: foo
+  router_id: 192.168.1.1
   as: 65158
   publish_interfaces:
     - eth0

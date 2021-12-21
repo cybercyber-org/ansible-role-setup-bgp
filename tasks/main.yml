@@ -9,3 +9,12 @@
     mode: "0644"
   notify:
     - Restart bird
+- name: "move bird into network-namespace if configured"
+  when: "'netns' in bgp"
+  ini_file:
+    path: /lib/systemd/system/bird.service
+    option: NetworkNamespacePath
+    value: "/var/run/netns/{{ bgp.netns }}"
+    section: Service
+  notify:
+    - Restart bird

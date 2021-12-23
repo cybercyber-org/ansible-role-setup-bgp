@@ -1,4 +1,5 @@
 - name: Restart bird
-  service:
+  ansible.builtin.systemd:
     name: bird
-    state: reloaded
+    state: restarted
+    daemon_reload: yes

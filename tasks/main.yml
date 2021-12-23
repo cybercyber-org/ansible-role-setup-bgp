@@ -11,10 +11,19 @@
     - Restart bird
 - name: "move bird into network-namespace if configured"
   when: "'netns' in bgp"
-  ini_file:
-    path: /lib/systemd/system/bird.service
-    option: NetworkNamespacePath
-    value: "/var/run/netns/{{ bgp.netns }}"
-    section: Service
-  notify:
-    - Restart bird
+  block:
+    - name: create bird.service.d directory
+      file:
+        path: /etc/systemd/system/bird.service.d
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+    - name: create bird.service drop-in
+      copy:
+        dest: /etc/systemd/system/bird.service.d/override.conf
+        content: |
+          [Service]
+          NetworkNamespacePath=/var/run/netns/{{ bgp.netns }}
+      notify:
+        - Restart bird

@@ -13,6 +13,14 @@ bgp:
   as: 65158
   publish_interfaces:
     - eth0
+  publish_networks:
+    - route: 2001:db8:10::/48
+      channel: ipv6
+      via: 2001:db8:1::1;
+    - route: 2001:db8:40::/48
+      channel: ipv6
+      via: |
+        "eth2"
   neighbors:
     - name: A
       address: 192.168.1.2

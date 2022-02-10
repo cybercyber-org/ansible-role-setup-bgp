@@ -26,6 +26,14 @@ protocol direct {
 	interface {{ '"' + bgp.publish_interfaces | join('",""') + '"' }};
 }
 
+{% for publish_network in bgp.get('publish_networks', []) %}
+protocol static {
+	{{ publish_network.channel }};
+
+	route {{ publish_network.route }} via {{ publish_network.via }};
+}
+{% endfor %}
+
 {% for neighbor in bgp.neighbors %}
 # link to {{ neighbor.name }}
 protocol bgp {
